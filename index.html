@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gustavo Nogueira — Blue Team Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0d12;
+      --surface:   #111318;
+      --surface2:  #0e1016;
+      --border:    #1e2230;
+      --accent:    #3b82f6;
+      --accent-dim:#1d4ed8;
+      --green:     #22c55e;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --subtle:    #94a3b8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 24px 120px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      margin-bottom: 72px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      flex-shrink: 0;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--green); }
+      50%       { opacity: 0.5; box-shadow: 0 0 2px var(--green); }
+    }
+
+    .status-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      font-weight: 400;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    .subtitle span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      margin-bottom: 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 28px;
+    }
+
+    .about-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .about-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: var(--subtle);
+      line-height: 1.7;
+    }
+
+    .about-text strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── EXPERIENCE ── */
+    .experience {
+      margin-bottom: 72px;
+    }
+
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .exp-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .exp-item:first-child { border-radius: 10px 10px 0 0; }
+    .exp-item:last-child  { border-radius: 0 0 10px 10px; }
+    .exp-item:only-child  { border-radius: 10px; }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+      border-radius: 2px 0 0 2px;
+    }
+
+    .exp-item.current::before {
+      background: var(--accent);
+    }
+
+    .exp-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .exp-item.current .exp-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    .exp-content { flex: 1; }
+
+    .exp-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .exp-company {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .exp-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .exp-role {
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .exp-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SKILLS ── */
+    .skills {
+      margin-bottom: 72px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .skill-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .skill-group-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #0f1117;
+      border: 1px solid var(--border);
+      color: var(--subtle);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-section {
+      margin-bottom: 72px;
+    }
+
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .lab-cluster {
+      border: 1px solid #2a1f4e;
+      border-radius: 12px;
+      padding: 20px;
+      background: #0d0b14;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .lab-cluster-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #a78bfa;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lab-cluster-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #2a1f4e;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 32px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .card:hover {
+      border-color: #2a3050;
+      transform: translateY(-2px);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: -0.01em;
+    }
+
+    .card-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .card-link svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--subtle);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    /* ── TAGS ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-lang {
+      background: #1e293b;
+      color: #7dd3fc;
+      border: 1px solid #1e3a5f;
+    }
+
+    .tag-tool {
+      background: #1a1f2e;
+      color: var(--subtle);
+      border: 1px solid var(--border);
+    }
+
+    .tag-category {
+      background: #0f2318;
+      color: #4ade80;
+      border: 1px solid #14532d;
+    }
+
+    /* ── LEARNINGS ── */
+    .learnings {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .learnings-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+
+    .learnings-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .learning-item {
+      font-size: 12px;
+      color: var(--muted);
+      background: #0f1117;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-link:hover {
+      color: var(--accent);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .page { padding: 48px 16px 80px; }
+      .about { grid-template-columns: 1fr; }
+      .about-card.full { grid-column: 1; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .card { padding: 20px 18px; }
+      .card-header { flex-direction: column; gap: 12px; }
+      .card-link { align-self: flex-start; }
+      .exp-header { flex-direction: column; gap: 2px; }
+      footer { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+    @media (max-width: 420px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div class="status-dot"></div>
+        <span class="status-label">Open to Blue Team roles</span>
+      </div>
+      <h1>Gustavo Nogueira</h1>
+      <p class="subtitle">
+        Software developer transitioning into <span>cybersecurity</span>.
+        Building Blue Team tools focused on <span>threat detection</span>, <span>log analysis</span>, and <span>incident response</span>.
+      </p>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="about">
+      <div class="about-card full">
+        <div class="about-label">About</div>
+        <p class="about-text">
+          21-year-old developer with <strong>2 years of professional experience</strong> as a software engineering intern
+          at Dataprev and Banco do Nordeste do Brasil. Currently deepening expertise in Blue Team operations —
+          with a focus on SOC workflows, detection engineering, and building security tooling from scratch.
+          The combination of <strong>development background and security knowledge</strong> allows me to write
+          detections and automate responses, not just triage alerts.
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="about-label">Focus areas</div>
+        <p class="about-text">
+          SOC / Detection Engineering<br>
+          Threat Intelligence<br>
+          Log Analysis &amp; SIEM<br>
+          Security Tooling (Python)
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="about-label">Location</div>
+        <p class="about-text">
+          Brazil<br>
+          <strong style="color: var(--accent); font-size:13px;">Available for remote roles</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="experience">
+      <div class="section-label">Experience</div>
+      <div class="exp-list">
+
+        <div class="exp-item current">
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <span class="exp-company">Banco do Nordeste do Brasil (BNB)</span>
+              <span class="exp-period">2025 — present</span>
+            </div>
+            <div class="exp-role">Software Engineering Intern</div>
+            <div class="exp-desc">Software development internship at one of Brazil's largest public banks.</div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-dot"></div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <span class="exp-company">Dataprev</span>
+              <span class="exp-period">2024 — 2025</span>
+            </div>
+            <div class="exp-role">Software Engineering Intern</div>
+            <div class="exp-desc">1-year internship at Brazil's national social security technology company.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills">
+      <div class="section-label">Skills &amp; Tools</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Bash</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Security</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SIEM</span>
+            <span class="skill-tag">Wireshark</span>
+            <span class="skill-tag">MITRE ATT&amp;CK</span>
+            <span class="skill-tag">OSINT</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Dev / Infra</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">SQLite</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Linux</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects-section">
+      <div class="section-label">Projects</div>
+      <div class="projects">
+
+        <div class="lab-cluster">
+          <div class="lab-cluster-label">⚗️ Solomon Lab</div>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title-row">
+              <span class="card-icon">🪤</span>
+              <span class="card-title">Naberius-Honeypot</span>
+            </div>
+            <a class="card-link" href="https://github.com/gustavonogvi/Naberius-Honeypot" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+
+          <p class="card-desc">
+            SSH honeypot that impersonates a real OpenSSH server to capture unauthorized access attempts.
+            Performs a full SSH handshake via <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7dd3fc;">paramiko</code>,
+            logs credentials, HASSH fingerprints, and geolocation data — then visualizes everything on a real-time web dashboard.
+          </p>
+
+          <div class="tags">
+            <span class="tag tag-category">Honeypot</span>
+            <span class="tag tag-category">Threat Intel</span>
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-lang">HTML / JS</span>
+            <span class="tag tag-tool">paramiko</span>
+            <span class="tag tag-tool">Flask</span>
+            <span class="tag tag-tool">SQLite</span>
+            <span class="tag tag-tool">HASSH</span>
+            <span class="tag" style="background:#1a0f2e;color:#a78bfa;border:1px solid #4c1d95;">⚗️ Solomon Lab</span>
+          </div>
+
+          <div class="learnings">
+            <div class="learnings-title">Concepts covered</div>
+            <div class="learnings-list">
+              <span class="learning-item">SSH protocol internals</span>
+              <span class="learning-item">TCP sockets</span>
+              <span class="learning-item">Key exchange &amp; auth flow</span>
+              <span class="learning-item">HASSH fingerprinting</span>
+              <span class="learning-item">IP geolocation enrichment</span>
+              <span class="learning-item">SIEM data pipeline</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title-row">
+              <span class="card-icon">🔍</span>
+              <span class="card-title">Vassago-Analyzer</span>
+            </div>
+            <a class="card-link" href="https://github.com/gustavonogvi/Vassago-Analyzer" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+
+          <p class="card-desc">
+            Command-line SSH log analyzer focused on threat detection. Ingests structured event data, runs detection rules against it, and surfaces attacker behavior as severity-ranked alerts mapped to MITRE ATT&CK techniques. Exports findings as JSON or HTML reports.
+          </p>
+
+          <div class="tags">
+            <span class="tag tag-category">Detection Engineering</span>
+            <span class="tag tag-category">CLI</span>
+            <span class="tag tag-lang">Python</span>
+            <span class="tag tag-tool">SQLite</span>
+            <span class="tag tag-tool">MITRE ATT&CK</span>
+            <span class="tag" style="background:#1a0f2e;color:#a78bfa;border:1px solid #4c1d95;">⚗️ Solomon Lab</span>
+          </div>
+
+          <div class="learnings">
+            <div class="learnings-title">Concepts covered</div>
+            <div class="learnings-list">
+              <span class="learning-item">Detection rule engineering</span>
+              <span class="learning-item">MITRE ATT&CK mapping</span>
+              <span class="learning-item">Brute force detection</span>
+              <span class="learning-item">HASSH fingerprint analysis</span>
+              <span class="learning-item">Alert triage workflow</span>
+              <span class="learning-item">Structured report generation</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title-row">
+              <span class="card-icon">⚗️</span>
+              <span class="card-title">Solomon Lab</span>
+            </div>
+            <a class="card-link" href="https://github.com/gustavonogvi/salomon-lab" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+
+          <p class="card-desc">
+            Blue Team home lab that spins up with a single <code style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#7dd3fc;">vagrant up</code>.
+            Orchestrates Naberius and Vassago into a full attack pipeline: Kali runs SSH brute force and SMB attacks,
+            Naberius captures every attempt, Vassago detects and maps to MITRE ATT&CK — all automated, no manual setup.
+          </p>
+
+          <div class="tags">
+            <span class="tag tag-category">Blue Team Lab</span>
+            <span class="tag tag-category">Attack Simulation</span>
+            <span class="tag tag-lang">Bash</span>
+            <span class="tag tag-tool">Vagrant</span>
+            <span class="tag tag-tool">VirtualBox</span>
+            <span class="tag tag-tool">Kali Linux</span>
+            <span class="tag tag-tool">MITRE ATT&CK</span>
+          </div>
+
+          <div class="learnings">
+            <div class="learnings-title">Concepts covered</div>
+            <div class="learnings-list">
+              <span class="learning-item">Lab automation</span>
+              <span class="learning-item">SSH brute force (T1110.001)</span>
+              <span class="learning-item">SMB attack simulation</span>
+              <span class="learning-item">Windows Event Log analysis</span>
+              <span class="learning-item">systemd service management</span>
+              <span class="learning-item">VM provisioning</span>
+            </div>
+          </div>
+        </article>
+
+        </div><!-- end lab-cluster -->
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <span class="footer-name">Gustavo Vinhas Nogueira</span>
+      <nav class="footer-links">
+        <a class="footer-link" href="https://github.com/gustavonogvi" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          github
+        </a>
+        <a class="footer-link" href="https://www.linkedin.com/in/gustavo-vinhas-0ab143268/" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          linkedin
+        </a>
+      </nav>
+    </footer>
+
+  </div>
+</body>
+</html>
