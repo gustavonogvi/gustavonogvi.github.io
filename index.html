@@ -384,6 +384,11 @@
       letter-spacing: -0.01em;
     }
 
+    @keyframes link-border-pulse {
+      0%, 100% { border-color: var(--border); box-shadow: none; }
+      50% { border-color: rgba(125, 211, 252, 0.45); box-shadow: 0 0 6px rgba(125, 211, 252, 0.18); }
+    }
+
     .card-link {
       display: flex;
       align-items: center;
@@ -395,14 +400,17 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 5px 10px;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
       white-space: nowrap;
       flex-shrink: 0;
+      animation: link-border-pulse 2.8s ease-in-out infinite;
     }
 
     .card-link:hover {
       color: var(--accent);
       border-color: var(--accent);
+      box-shadow: 0 0 8px rgba(125, 211, 252, 0.25);
+      animation: none;
     }
 
     .card-link svg {
@@ -659,7 +667,7 @@
           <div class="card-header">
             <div class="card-title-row">
               <span class="card-icon">/</span>
-              <span class="card-title">Naberius-Honeypot</span>
+              <span class="card-title">naberius-honeypot</span>
             </div>
             <a class="card-link" href="https://github.com/gustavonogvi/Naberius-Honeypot" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -704,7 +712,7 @@
           <div class="card-header">
             <div class="card-title-row">
               <span class="card-icon">/</span>
-              <span class="card-title">Vassago-Analyzer</span>
+              <span class="card-title">vassago-analyzer</span>
             </div>
             <a class="card-link" href="https://github.com/gustavonogvi/Vassago-Analyzer" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -744,7 +752,7 @@
           <div class="card-header">
             <div class="card-title-row">
               <span class="card-icon">/</span>
-              <span class="card-title">Solomon Lab</span>
+              <span class="card-title">solomon-lab</span>
             </div>
             <a class="card-link" href="https://github.com/gustavonogvi/salomon-lab" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
